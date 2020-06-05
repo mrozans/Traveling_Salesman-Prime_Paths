@@ -1,11 +1,16 @@
 import random
 from datetime import datetime
-import copy
+import pandas as pd
+from algorithm import total_distance
 
 
 class GeneticAlgorithm:
-    def __init__(self, path):
+    def __init__(self, path, df_cities):
         self.path = path
+        self.population = []
+        self.population_size = 100
+        self.parents = []
+        self.df_cities = df_cities
 
     def pmx_method(self, subject_1, subject_2):
         random.seed(datetime.now())
@@ -65,29 +70,37 @@ class GeneticAlgorithm:
         print('Child 2: ' + str(child_2))
         return child_1, child_2
 
-    def weighted_random_choice(self, choices):
-        max = sum(choices.values())
-        pick = random.uniform(0, max)
-        current = 0
-        for key, value in choices.items():
-            current += value
-            if current > pick:
-                return key
-    def roulette_wheel_selection(self, population, num_new_parents):
-        population_copy = copy.deepcopy(population)
-        new_parents = []
-        for i in range(0, num_new_parents):
-            new_parent = self.weighted_random_choice(population_copy)
-            del population_copy[new_parent]
-            new_parents.append(new_parent)
-        return new_parents
+    def generate_population(self):
+        for i in range(self.population_size):
+            chromosome = []
+            gens = list(self.path.copy())
+            random.shuffle(gens)
+            for gen in gens:
+                chromosome.append(gen)
+            self.population.append(chromosome)
 
-obj = GeneticAlgorithm([1, 2, 3])
+    def roulette_wheel(self):
+        self.parents = []
+        fitness = []
+        total = 0
+        for i in range(self.population_size):
+            fitness.append(total_distance(self.df_cities, self.population[i]))
+            total += fitness[i]
+        for i in range(self.population_size):
+            fitness[i] = (1 - fitness[i]/total) / (self.population_size - 1)
+        for i in range(self.population_size):
+            roll = random.uniform(0, 1)
+            so_far = 0
+            for j in range(self.population_size):
+                so_far += fitness[j]
+                if so_far >= roll:
+                    self.parents.append(self.population[j])
+                    break
 
-population = {
-    "najlepszy" : 20,
-    "sredni" : 10,
-    "slaby" : 6,
-    "najgorszy": 2
-}
-print(obj.roulette_wheel_selection(population, 2))
+
+df_cities = pd.read_csv('input/cities2.csv')
+obj = GeneticAlgorithm([2, 3, 4, 5, 6, 7], df_cities)
+obj.generate_population()
+obj.roulette_wheel()
+print(obj.parents)
+

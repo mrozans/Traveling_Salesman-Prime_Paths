@@ -97,20 +97,20 @@ prime_cities = sieve_of_eratosthenes(max(df_cities.CityId))
 # print(total_distance(df_cities, path))
 
 
-nnpath = nearest_neighbour(df_cities)
-
-nnpath_with_primes = nnpath.copy()
-for index in range(20, len(nnpath_with_primes)-30):
-    city = nnpath_with_primes[index]
-    if prime_cities[city] & ((index + 1) % 10 != 0):
-        for i in range(-1, 3):
-            tmp_path = nnpath_with_primes.copy()
-            swap_index = (int((index+1)/10) + i)*10 - 1
-            tmp_path[swap_index], tmp_path[index] = tmp_path[index], tmp_path[swap_index]
-            if total_distance(df_cities, tmp_path[min(swap_index, index) - 1 : max(swap_index, index) + 2]) < \
-                    total_distance(df_cities, nnpath_with_primes[min(swap_index, index) - 1: max(swap_index, index) + 2]):
-                nnpath_with_primes = tmp_path.copy()
-                break
-print('Total distance with the Nearest Neighbor With Prime Swaps ' + "is {:,}".format(total_distance(df_cities, nnpath_with_primes)))
-path = opt2(df_cities, nnpath_with_primes, False)
-print(total_distance(df_cities, path))
+# nnpath = nearest_neighbour(df_cities)
+#
+# nnpath_with_primes = nnpath.copy()
+# for index in range(20, len(nnpath_with_primes)-30):
+#     city = nnpath_with_primes[index]
+#     if prime_cities[city] & ((index + 1) % 10 != 0):
+#         for i in range(-1, 3):
+#             tmp_path = nnpath_with_primes.copy()
+#             swap_index = (int((index+1)/10) + i)*10 - 1
+#             tmp_path[swap_index], tmp_path[index] = tmp_path[index], tmp_path[swap_index]
+#             if total_distance(df_cities, tmp_path[min(swap_index, index) - 1 : max(swap_index, index) + 2]) < \
+#                     total_distance(df_cities, nnpath_with_primes[min(swap_index, index) - 1: max(swap_index, index) + 2]):
+#                 nnpath_with_primes = tmp_path.copy()
+#                 break
+# print('Total distance with the Nearest Neighbor With Prime Swaps ' + "is {:,}".format(total_distance(df_cities, nnpath_with_primes)))
+# path = opt2(df_cities, nnpath_with_primes, False)
+# print(total_distance(df_cities, path))
