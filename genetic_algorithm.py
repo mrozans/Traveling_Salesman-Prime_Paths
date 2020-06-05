@@ -1,5 +1,6 @@
 import random
 from datetime import datetime
+import copy
 
 
 class GeneticAlgorithm:
@@ -64,7 +65,29 @@ class GeneticAlgorithm:
         print('Child 2: ' + str(child_2))
         return child_1, child_2
 
+    def weighted_random_choice(self, choices):
+        max = sum(choices.values())
+        pick = random.uniform(0, max)
+        current = 0
+        for key, value in choices.items():
+            current += value
+            if current > pick:
+                return key
+    def roulette_wheel_selection(self, population, num_new_parents):
+        population_copy = copy.deepcopy(population)
+        new_parents = []
+        for i in range(0, num_new_parents):
+            new_parent = self.weighted_random_choice(population_copy)
+            del population_copy[new_parent]
+            new_parents.append(new_parent)
+        return new_parents
 
 obj = GeneticAlgorithm([1, 2, 3])
 
-obj.pmx_method([1, 2, 3, 4, 5, 6, 7], [5, 4, 6, 7, 2, 1, 3])
+population = {
+    "najlepszy" : 20,
+    "sredni" : 10,
+    "slaby" : 6,
+    "najgorszy": 2
+}
+print(obj.roulette_wheel_selection(population, 2))
