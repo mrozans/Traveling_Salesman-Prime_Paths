@@ -16,6 +16,7 @@ class GeneticAlgorithm:
     def pmx_method(self, subject_1, subject_2):
         random.seed(datetime.now())
         borders = random.sample(range(0, len(subject_1)), 2)
+        borders = [1,4]
         borders.sort()
         subject_front_1 = subject_1[:borders[0]]
         subject_front_2 = subject_2[:borders[0]]
@@ -37,10 +38,15 @@ class GeneticAlgorithm:
                         del pairs[i]
                         del pairs[k - 1]
                         break
+                    elif pairs[i][0] == pairs[k][1]:
+                        pairs.append([pairs[k][0], pairs[i][1]])
+                        del pairs[i]
+                        del pairs[k - 1]
+                        break
             finished = True
             for i in range(0, len(pairs)):
                 for k in range(i + 1, len(pairs)):
-                    if pairs[i][1] == pairs[k][0]:
+                    if pairs[i][1] == pairs[k][0] or pairs[i][0] == pairs[k][1]:
                         finished = False
                         break
             if finished:

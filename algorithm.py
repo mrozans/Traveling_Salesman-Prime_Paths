@@ -88,8 +88,8 @@ def opt2(df_city, path, simplified):
     return best_path
 
 
-# df_cities = pd.read_csv('input/cities2.csv')
-# prime_cities = sieve_of_eratosthenes(max(df_cities.CityId))
+df_cities = pd.read_csv('input/cities2.csv')
+prime_cities = sieve_of_eratosthenes(max(df_cities.CityId))
 # # dumbest_path = list(df_cities.CityId[:].append(pd.Series([0])))
 # # print(total_distance(df_cities, dumbest_path))
 # # path = opt2(df_cities, dumbest_path)
