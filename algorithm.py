@@ -14,7 +14,7 @@ path = nearest_neighbour(df_cities)
 print('Total distance with the Nearest Neighbor' + "is {:,}".format(total_distance(df_cities, path, prime_cities)))
 path = nn_with_primes(path, prime_cities, df_cities)
 print('Total distance with Prime Swaps ' + "is {:,}".format(total_distance(df_cities, path, prime_cities)))
-group = 50
+group = 500
 jump = 250
 start = 0
 end = 0
