@@ -88,15 +88,15 @@ def opt2(df_city, path, simplified):
     return best_path
 
 
-df_cities = pd.read_csv('input/cities2.csv')
-prime_cities = sieve_of_eratosthenes(max(df_cities.CityId))
-# dumbest_path = list(df_cities.CityId[:].append(pd.Series([0])))
-# print(total_distance(df_cities, dumbest_path))
-# path = opt2(df_cities, dumbest_path)
-# print(path)
-# print(total_distance(df_cities, path))
-
-
+# df_cities = pd.read_csv('input/cities2.csv')
+# prime_cities = sieve_of_eratosthenes(max(df_cities.CityId))
+# # dumbest_path = list(df_cities.CityId[:].append(pd.Series([0])))
+# # print(total_distance(df_cities, dumbest_path))
+# # path = opt2(df_cities, dumbest_path)
+# # print(path)
+# # print(total_distance(df_cities, path))
+#
+#
 # nnpath = nearest_neighbour(df_cities)
 #
 # nnpath_with_primes = nnpath.copy()
@@ -111,6 +111,6 @@ prime_cities = sieve_of_eratosthenes(max(df_cities.CityId))
 #                     total_distance(df_cities, nnpath_with_primes[min(swap_index, index) - 1: max(swap_index, index) + 2]):
 #                 nnpath_with_primes = tmp_path.copy()
 #                 break
-# print('Total distance with the Nearest Neighbor With Prime Swaps ' + "is {:,}".format(total_distance(df_cities, nnpath_with_primes)))
+#print('Total distance with the Nearest Neighbor With Prime Swaps ' + "is {:,}".format(total_distance(df_cities, nnpath_with_primes)))
 # path = opt2(df_cities, nnpath_with_primes, False)
 # print(total_distance(df_cities, path))
