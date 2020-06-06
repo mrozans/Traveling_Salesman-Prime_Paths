@@ -23,14 +23,16 @@ while True:
         start = 1
     else:
         start = start + jump
+    if start >= len(path):
+        break
     end = start + group
     if end >= len(path):
         end = len(path) - 1
     gen_path = path[start:end].copy()
-    gen = genetic_algorithm.GeneticAlgorithm(gen_path, df_cities, path[start-1], path[end], prime_cities)
+    gen = genetic_algorithm.GeneticAlgorithm(gen_path, df_cities, path[start-1], path[end-1], prime_cities)
     selected_path = gen.calculate()
     a = total_distance(df_cities, path[start - 1:end + 1], prime_cities)
-    b = total_distance(df_cities, [path[start - 1]] + selected_path + [path[end]], prime_cities)
+    b = total_distance(df_cities, [path[start - 1]] + gen_path + [path[end]], prime_cities)
     print(a)
     print(b)
     if a > b:
