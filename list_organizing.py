@@ -96,6 +96,6 @@ def opt2(df_city, path, simplified, limit, prime_cities):
         if simplified and swap:
             break
     limit = limit - 1
-    if swap and ((limit > 0 and simplified) or not simplified):
+    if swap and limit > 0:
         return opt2(df_city, best_path, simplified, limit, prime_cities)
     return best_path

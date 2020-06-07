@@ -9,7 +9,7 @@ class GeneticAlgorithm:
         self.path = path
         self.population = []
         self.population_size = 100
-        self.iterations = 200
+        self.iterations = 500
         self.parents = []
         self.children = []
         self.fitness = []
